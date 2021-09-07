@@ -29,9 +29,32 @@ public class Bot extends TelegramLongPollingBot {
         Boolean insidePlay = false;
         Boolean step2 = false;
         Boolean step3 = false;
+        Boolean isUserExist =false;
         // We check if the update has a message and the message has text
            if (update.hasMessage() && update.getMessage().hasText()) {
+            if(update.getMessage().getText().equals("/start")){
+                isUserExist = mainService.searchUser(update.getMessage().getChatId());
+                if(isUserExist){
+                SendMessage message5 = new SendMessage(); // Create a SendMessage object with mandatory fields
+                message5.setChatId(update.getMessage().getChatId().toString());
+                message5.setText("Как Вас зовут?");
 
+                try {
+                    execute(message5); // Call method to send the message
+                } catch (TelegramApiException e) {
+                    e.printStackTrace();
+                }
+                SendMessage message6 = new SendMessage(); // Create a SendMessage object with mandatory fields
+                message6.setChatId(update.getMessage().getChatId().toString());
+                message6.setText(mainService.addNewUser(update.getMessage().getChatId()));
+                try {
+                    execute(message6); // Call method to send the message
+                } catch (TelegramApiException e) {
+                    e.printStackTrace();
+                }
+                isUserExist = false;
+            }}
+            else{
             SendMessage message = new SendMessage(); // Create a SendMessage object with mandatory fields
             message.setChatId(update.getMessage().getChatId().toString());
             switch (update.getMessage().getText()) {
@@ -57,40 +80,43 @@ public class Bot extends TelegramLongPollingBot {
                 e.printStackTrace();
             }
 
-            if(insidePlay){
+
+
+
+            if(insidePlay) {
                 SendMessage message1 = new SendMessage(); // Create a SendMessage object with mandatory fields
                 message1.setChatId(update.getMessage().getChatId().toString());
                 message1.setText(mainService.getGameDataset(update.getMessage().getText()));
                 step2 = true;
                 try {
-                    execute(message); // Call method to send the message
+                    execute(message1); // Call method to send the message
                 } catch (TelegramApiException e) {
                     e.printStackTrace();
                 }
-                if(step2){
+                if (step2) {
                     SendMessage message2 = new SendMessage(); // Create a SendMessage object with mandatory fields
                     message2.setChatId(update.getMessage().getChatId().toString());
                     message2.setText(mainService.getGame(update.getMessage().getText()));
                     step3 = true;
                     try {
-                        execute(message); // Call method to send the message
+                        execute(message2); // Call method to send the message
                     } catch (TelegramApiException e) {
                         e.printStackTrace();
                     }
                 }
-                if(step3){
-                    SendMessage message2 = new SendMessage(); // Create a SendMessage object with mandatory fields
-                    message2.setChatId(update.getMessage().getChatId().toString());
-                    message2.setText(mainService.getQuestion(update.getMessage().getText()));
+                if (step3) {
+                    SendMessage message3 = new SendMessage(); // Create a SendMessage object with mandatory fields
+                    message3.setChatId(update.getMessage().getChatId().toString());
+                    message3.setText(mainService.getQuestion(update.getMessage().getText()));
                     step3 = true;
                     try {
-                        execute(message); // Call method to send the message
+                        execute(message3); // Call method to send the message
                     } catch (TelegramApiException e) {
                         e.printStackTrace();
                     }
                 }
-               insidePlay = step2 = step3 = false;
-
+                insidePlay = step2 = step3 = false;
+            }
             }
         }
 

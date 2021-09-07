@@ -1,5 +1,6 @@
 package com.gbep.botapi.bot.service;
 
+import com.gbep.botapi.bot.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -43,6 +44,22 @@ public class MainService {
     public String getQuestion(String gameID){
         String question = restTemplate.getForObject("http://MASTER/", String.class);
         return  question;
+    }
+
+    public Boolean searchUser(Long chatID){
+       User user = restTemplate.getForObject("http://MASTER/api/{user_id}/", User.class);
+        if(user != null)
+       return  false;
+        return true;
+
+    }
+    public String addNewUser(Long chatID){
+       {
+            //спросить имя
+           User user =  User.builder().id(1).userName("w").level(1l).numberOfGames(0l).chatID(chatID).build();
+            user = restTemplate.postForObject("http://MASTER/api/{user_id}/", "/", User.class);
+        }
+        return "Добро пожаловать в игру!";
     }
 
 
