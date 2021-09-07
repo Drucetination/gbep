@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,9 +19,11 @@ public class UserConfig {
     private String user_id;
     private Status status = Status.INITIAL;
     private Microservice service = Microservice.NONE;
-    private Optional<String> dataset_name;
+    private String dataset_name;
     private int next_question = 0;
-    private List<String> questions;
+    private List<String> questions = new ArrayList<String>();
+    private int correct_answered = 0;
+    private boolean wonLast = false;
 
     public List<String> getQuestions() {
         return questions;
@@ -37,11 +41,11 @@ public class UserConfig {
         this.next_question = next_question;
     }
 
-    public Optional<String> getDataset_name() {
+    public String getDataset_name() {
         return dataset_name;
     }
 
-    public void setDataset_name(Optional<String> dataset_name) {
+    public void setDataset_name(String dataset_name) {
         this.dataset_name = dataset_name;
     }
 
@@ -59,5 +63,21 @@ public class UserConfig {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public int getCorrect_answered() {
+        return correct_answered;
+    }
+
+    public void setCorrect_answered(int correct_answered) {
+        this.correct_answered = correct_answered;
+    }
+
+    public boolean isWonLast() {
+        return wonLast;
+    }
+
+    public void setWonLast(boolean wonLast) {
+        this.wonLast = wonLast;
     }
 }
