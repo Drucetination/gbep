@@ -1,5 +1,6 @@
 package com.gbep.game.definitions.controller;
 
+import com.gbep.game.definitions.entity.Answer;
 import com.gbep.game.definitions.entity.Game;
 import com.gbep.game.definitions.entity.Task;
 import com.gbep.game.definitions.repository.DefinitionsRepo;
@@ -22,7 +23,7 @@ public class DefinitionsController {
     @PostMapping("/")
     public Game saveGame(Game game) {
         return definitionsService.saveGame(game);
-    };
+    }
 
     @GetMapping("/all")
     public List<Game> getAll() {
@@ -40,7 +41,7 @@ public class DefinitionsController {
     }
 
     @PostMapping("/{name}/{task_id}")
-    public Boolean checkAnswer(@PathVariable String name, @PathVariable String task_id, @RequestBody String answer) {
+    public Boolean checkAnswer(@PathVariable String name, @PathVariable String task_id, @RequestBody Answer answer) {
         return definitionsService.checkAnswer(name, task_id, answer);
     }
 
