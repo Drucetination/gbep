@@ -7,7 +7,6 @@ import com.gbep.game.sentences.repository.SentenceRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.*;
 
 @Service
