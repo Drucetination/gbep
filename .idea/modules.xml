@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/config-server/config-server.iml" filepath="$PROJECT_DIR$/config-server/config-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/definitions/definitions.iml" filepath="$PROJECT_DIR$/definitions/definitions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/discovery-service-eurika/discovery-service-eurika.iml" filepath="$PROJECT_DIR$/discovery-service-eurika/discovery-service-eurika.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/gbep.iml" filepath="$PROJECT_DIR$/.idea/gbep.iml" />
+      <module fileurl="file://$PROJECT_DIR$/master-service/master-service.iml" filepath="$PROJECT_DIR$/master-service/master-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/questions/questions.iml" filepath="$PROJECT_DIR$/questions/questions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sentences/sentences.iml" filepath="$PROJECT_DIR$/sentences/sentences.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user-service/user-service.iml" filepath="$PROJECT_DIR$/user-service/user-service.iml" />
+    </modules>
+  </component>
+</project>
