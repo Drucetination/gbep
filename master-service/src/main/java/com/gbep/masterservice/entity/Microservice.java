@@ -5,7 +5,7 @@ import com.gbep.masterservice.VO.Pair;
 import org.springframework.web.client.RestTemplate;
 
 public enum Microservice {
-    NONE("none") {
+    NONE("NONE") {
         @Override
         public String getQuestion(RestTemplate restTemplate, String dataset, String question_id) {
             return " ";

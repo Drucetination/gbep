@@ -2,6 +2,8 @@ package com.gbep.masterservice.entity;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -11,19 +13,25 @@ import java.util.List;
 import java.util.Optional;
 
 
-
+@Data
 @Document
 @AllArgsConstructor
 public class UserConfig {
+
     @Id
-    private String user_id;
+    private String userid;
+
     private Status status = Status.INITIAL;
     private Microservice service = Microservice.NONE;
-    private String dataset_name;
+    private String dataset_name = "";
     private int next_question = 0;
     private List<String> questions = new ArrayList<String>();
     private int correct_answered = 0;
     private boolean wonLast = false;
+
+    public UserConfig(String user_id) {
+        this.userid = user_id;
+    }
 
     public List<String> getQuestions() {
         return questions;

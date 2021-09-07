@@ -5,15 +5,13 @@ import com.gbep.masterservice.entity.QuestionResponse;
 import com.gbep.masterservice.entity.Status;
 import com.gbep.masterservice.entity.UserConfig;
 import com.gbep.masterservice.repository.UserConfigRepo;
-import com.netflix.discovery.converters.Auto;
-import org.checkerframework.checker.nullness.qual.AssertNonNullIfNonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
+import java.util.Optional;
 
 @Service
 public class MasterService {
@@ -33,8 +31,10 @@ public class MasterService {
             user.setDataset_name(name);
             user.setNext_question(0);
 
-            List<String> questions = restTemplate.getForObject("http://" + name + "/", (Class<List<String>>) new ArrayList<String>().getClass());
+            List<String> questions = restTemplate.getForObject("http://" + name + "/sentences/", List.class);
             user.setQuestions(questions);
+
+            repo.save(user);
 
             return true;
         }
@@ -43,7 +43,7 @@ public class MasterService {
     }
 
     public List<String> getListOfDatasets(String ms_name) {
-        return restTemplate.getForObject("http://" + ms_name + "/all", (Class<List<String>>) new ArrayList<String>().getClass());
+        return restTemplate.getForObject("http://" + ms_name + "/all", List.class);
     }
 
     public QuestionResponse getQuestion(String user_id) {
@@ -97,5 +97,19 @@ public class MasterService {
         } else {
             return false;
         }
+    }
+
+    public boolean registerUser(String user_id) {
+        Optional<UserConfig> uc = repo.findUserConfigByUserid(user_id);
+        if (uc.isEmpty()) {
+            UserConfig new_uc = new UserConfig(user_id);
+            repo.insert(new_uc);
+
+            return true;
+
+            // ADD USER TO USERSERVICE
+        }
+
+        return false;
     }
 }

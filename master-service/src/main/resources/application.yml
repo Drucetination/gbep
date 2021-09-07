@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8090
 
 eureka:
   client:
@@ -12,3 +12,11 @@ eureka:
 spring:
   application:
     name: MASTER
+  data:
+    mongodb:
+      authentication-database: admin
+      username: rootuser
+      password: rootpass
+      database: userconfig
+      port: 27017
+      host: localhost

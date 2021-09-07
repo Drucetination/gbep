@@ -18,7 +18,13 @@ public class MasterController {
     @Autowired
     private MasterService masterService;
 
-    @GetMapping("/{ms_name}")
+
+    @GetMapping("/users/{user_id}")
+    public boolean registerUser(@PathVariable String user_id) {
+        return masterService.registerUser(user_id);
+    }
+
+    @GetMapping("/{ms_name}/")
     public List<String> getListOfDatasets(@PathVariable String ms_name) {
         return masterService.getListOfDatasets(ms_name);
     }
