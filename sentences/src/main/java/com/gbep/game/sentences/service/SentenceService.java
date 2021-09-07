@@ -4,6 +4,9 @@ import com.gbep.game.sentences.entity.Pair;
 import com.gbep.game.sentences.entity.SentenceDataset;
 import com.gbep.game.sentences.entity.UserAnswer;
 import com.gbep.game.sentences.repository.SentenceRepo;
+import com.mongodb.ConnectionString;
+import com.mongodb.client.*;
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +17,14 @@ public class SentenceService {
     @Autowired
     private SentenceRepo repo;
 
-    public List<SentenceDataset> findAll() {
-        return repo.findAll();
+    public List<String> findAll() {
+        MongoClient mongoClient = MongoClients
+                                        .create(
+                                                new ConnectionString("mongodb://rootuser:rootpass@localhost/?authSource=sentences")
+                                        );
+        MongoDatabase db = mongoClient.getDatabase("sentences");
+        MongoCollection<Document> collection = db.getCollection("sentenceDataset");
+        return collection.distinct("name", String.class).into(new ArrayList<String>());
     }
 
     public Optional<SentenceDataset> saveDataset(SentenceDataset dataset) {
