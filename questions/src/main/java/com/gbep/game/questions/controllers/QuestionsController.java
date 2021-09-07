@@ -43,6 +43,13 @@ public class QuestionsController {
         questionsService.deleteDataset(datasetName);
 
     }
+
+    @DeleteMapping("/delete/all")
+    void deleteAllDatasets(){
+
+        questionsService.deleteAllDatasets();
+
+    }
     
     @GetMapping("/all")
     List<String> getAllDatasetNames(){

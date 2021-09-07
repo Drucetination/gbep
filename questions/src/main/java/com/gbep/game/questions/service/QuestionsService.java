@@ -47,7 +47,7 @@ public class QuestionsService {
 
         return getDatasetByName(datasetName).getQuestions().stream()
                 .filter(question -> question.getId().equals(questionID))
-                .anyMatch(question -> question.getCorrectAnswer().equals(answer.getUserAnswer()));
+                .anyMatch(question -> question.getCorrectAnswer().equalsIgnoreCase(answer.getUserAnswer()));
 
     }
 
@@ -59,6 +59,12 @@ public class QuestionsService {
     public List<String> getAllDatasetNames() {
 
         return findAllDatasets().stream().map(QuestionsDataset::getName).collect(Collectors.toList());
+
+    }
+
+    public void deleteAllDatasets() {
+
+        datasetRepository.deleteAll();
 
     }
 }
