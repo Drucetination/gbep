@@ -16,6 +16,7 @@ import java.util.Optional;
 @Data
 @Document
 @AllArgsConstructor
+@NoArgsConstructor
 public class UserConfig {
 
     @Id

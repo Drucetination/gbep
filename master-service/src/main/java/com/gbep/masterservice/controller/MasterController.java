@@ -5,7 +5,6 @@ import com.gbep.masterservice.entity.QuestionResponse;
 import com.gbep.masterservice.service.MasterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +23,7 @@ public class MasterController {
         return masterService.registerUser(user_id);
     }
 
-    @GetMapping("/{ms_name}/")
+    @GetMapping("/service/{ms_name}")
     public List<String> getListOfDatasets(@PathVariable String ms_name) {
         return masterService.getListOfDatasets(ms_name);
     }
