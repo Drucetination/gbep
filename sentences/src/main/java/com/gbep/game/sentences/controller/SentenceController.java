@@ -25,7 +25,7 @@ public class SentenceController {
     }
 
     @GetMapping("/all")
-    public List<SentenceDataset> findAll() {
+    public List<String> findAll() {
         return sentenceService.findAll();
     }
 
