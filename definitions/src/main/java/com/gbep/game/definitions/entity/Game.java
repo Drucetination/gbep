@@ -6,7 +6,6 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.List;
-import java.util.Map;
 
 @Data
 @Builder
