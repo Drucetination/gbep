@@ -52,6 +52,13 @@ public class QuestionsService {
     }
 
     public void deleteDataset(String datasetName) {
+
         datasetRepository.deleteById(getDatasetByName(datasetName).getId());
+    }
+
+    public List<String> getAllDatasetNames() {
+
+        return findAllDatasets().stream().map(QuestionsDataset::getName).collect(Collectors.toList());
+
     }
 }
