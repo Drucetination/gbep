@@ -9,5 +9,5 @@ public class DefinitionsApplication {
     public static void main(String[] args) {
         SpringApplication.run(DefinitionsApplication.class, args);
     }
-
 }
+
