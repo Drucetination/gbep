@@ -2,6 +2,7 @@ package com.gbep.game.definitions.service;
 
 import com.gbep.game.definitions.entity.Answer;
 import com.gbep.game.definitions.entity.Game;
+import com.gbep.game.definitions.entity.Task;
 import com.gbep.game.definitions.repository.DefinitionsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,12 @@ public class DefinitionsService {
     }
 
 
-    public Game findGameByName(String name) {
-        return repo.findGameByName(name).orElse(null);
+    public List<String> findGameByName(String name) {
+        return repo.findGameByName(name).get()
+                .getTasks()
+                .stream()
+                .map(Task::getQuestion_id)
+                .toList();
 
     }
 
@@ -38,9 +43,27 @@ public class DefinitionsService {
                 .toList();
     }
 
-    public Boolean checkAnswer(String name, String task_id, Answer answer) {
-            return findGameByName(name).getTasks().stream()
-                    .filter(task -> task.getId().equals(task_id))
-                    .anyMatch(task -> task.getWord().equalsIgnoreCase(answer.getText()));
+//    public Boolean checkAnswer(String name, String task_id, Answer answer) {
+//            return findGameByName(name).getTasks().stream()
+//                    .filter(task -> task.getQuestion_id().equals(task_id))
+//                    .anyMatch(task -> task.getWord().equalsIgnoreCase(answer.getText()));
+//    }
+
+    public Task getQuestion(String id, String name) {
+        Optional<Game> data = repo.findGameByName(name);
+        if (data.isPresent()) {
+            for (Task question : data.get().getTasks()) {
+                if (Objects.equals(question.getQuestion_id(), id)) {
+                    return question;
+                }
+            }
+        }
+
+        return new Task();
+    }
+
+    public Boolean checkIfExists(String name) {
+        Optional<Game> d = repo.findGameByName(name);
+        return d.isEmpty();
     }
 }

@@ -9,15 +9,13 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.gbep.game</groupId>
-    <artifactId>questions</artifactId>
+    <artifactId>definitions</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>questions</name>
-    <description>questions</description>
+    <name>definitions</name>
+    <description>definitions</description>
     <properties>
-        <java.version>15</java.version>
+        <java.version>16</java.version>
         <spring-cloud.version>2020.0.3</spring-cloud.version>
-        <maven.compiler.source>15</maven.compiler.source>
-        <maven.compiler.target>15</maven.compiler.target>
     </properties>
     <dependencies>
         <dependency>
@@ -32,6 +30,10 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter-data-jpa</artifactId>-->
+        <!--        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -50,8 +52,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jpa</artifactId>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>2.2.3</version>
         </dependency>
     </dependencies>
     <dependencyManagement>
@@ -71,7 +74,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${project.parent.version}</version>
                 <configuration>
                     <excludes>
                         <exclude>

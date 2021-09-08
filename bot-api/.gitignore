@@ -32,4 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 
-/src/main/java/com/gbep/botapi/bot/config.txt
+/config.txt

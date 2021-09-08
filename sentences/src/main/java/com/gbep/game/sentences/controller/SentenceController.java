@@ -1,6 +1,7 @@
 package com.gbep.game.sentences.controller;
 
 
+import com.gbep.game.sentences.entity.Pair;
 import com.gbep.game.sentences.entity.SentenceDataset;
 import com.gbep.game.sentences.entity.UserAnswer;
 import com.gbep.game.sentences.service.SentenceService;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/sentences")
+@RequestMapping("/")
 @RequiredArgsConstructor
 public class SentenceController {
 
@@ -22,6 +23,11 @@ public class SentenceController {
     @PostMapping("/")
     public Optional<SentenceDataset> saveDataset(@RequestBody SentenceDataset dataset) {
         return sentenceService.saveDataset(dataset);
+    }
+
+    @GetMapping("/check_name/{name}")
+    public Boolean checkIfExists(@PathVariable String name) {
+        return sentenceService.checkIfExists(name);
     }
 
     @GetMapping("/all")
@@ -35,10 +41,11 @@ public class SentenceController {
         return sentenceService.getQuestionList(name);
     }
 
-    @PostMapping("/{name}/{id}")
-    public Boolean compareAnswers(@PathVariable("name") String name, @PathVariable("id") String question_id, @RequestBody UserAnswer answer) {
-        return sentenceService.compareAnswers(name, question_id, answer);
+    @GetMapping("/{name}/{id}")
+    public Pair getQuestion(@PathVariable String id, @PathVariable String name) {
+        return sentenceService.getQuestion(id, name);
     }
+
 
     @DeleteMapping("/{name}")
     public Optional<SentenceDataset> deleteDatasetByName(@PathVariable("name") String name) {

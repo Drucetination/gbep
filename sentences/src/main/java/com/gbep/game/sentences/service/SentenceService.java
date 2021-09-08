@@ -67,4 +67,22 @@ public class SentenceService {
     public Optional<SentenceDataset> deleteDatasetByName(String name) {
         return repo.deleteSentenceDatasetByName(name);
     }
+
+    public Pair getQuestion(String id, String name) {
+        Optional<SentenceDataset> data = repo.findSentenceDatasetByName(name);
+        if (data.isPresent()) {
+            for (Pair question : data.get().getData()) {
+                if (Objects.equals(question.getId(), id)) {
+                    return question;
+                }
+            }
+        }
+
+        return new Pair();
+    }
+
+    public Boolean checkIfExists(String name) {
+        Optional<SentenceDataset> dt = repo.findSentenceDatasetByName(name);
+        return dt.isEmpty();
+    }
 }

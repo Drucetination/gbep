@@ -1,6 +1,6 @@
 package com.gbep.masterservice.repository;
 
-import com.gbep.masterservice.entity.UserConfig;
+import com.gbep.masterservice.VO.UserConfig;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
